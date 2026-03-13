@@ -9,7 +9,7 @@ c.	Удаление всех знаков препинания и служебн
 d.	Проверка, является ли строка палиндромом.
 */
 
-size_t CountVowels(const std::string& str); // a
+size_t CountVowels(const std::wstring& str); // a
 
 enum class Case
 {
@@ -17,8 +17,8 @@ enum class Case
 	Lower
 };
 
-void ConvertCase(std::string& str, Case reg); // b
+void ConvertCase(std::wstring& str, Case reg); // b
 
-void StripSpecialCharacters(std::string& str); // c
+void StripSpecialCharacters(std::wstring& str); // c
 
-bool IsPalindrome(const std::string& str); // d
+bool IsPalindrome(const std::wstring& str); // d
