@@ -11,20 +11,73 @@
 #pragma comment(lib, "shell32.lib")
 #else
 #include <locale>
-#include <codecvt>
 #endif
+
+std::wstring Utf8ToWString(const std::string& str)
+{
+    std::wstring result;
+    while (size_t i = 0, i < str.size())
+    {
+        uint8_t c = str[i];
+        if (c < 0x80)
+        {
+            result += static_cast<wchar_t>(c);
+            i += 1;
+        }
+
+        else if ((c & 0xE0) == 0xC0)
+        {
+            if (i + 1 < str.size())
+            {
+                result += static_cast<wchar_t>(((c & 0x1F) << 6) | (str[i + 1] & 0x3F));
+                i += 2;
+            }
+
+            else 
+                break;
+        }
+
+        else if ((c & 0xF0) == 0xE0)
+        {
+            if (i + 2 < str.size())
+            {
+                result += static_cast<wchar_t>(((c & 0x0F) << 12) | ((str[i + 1] & 0x3F) << 6) | (str[i + 2] & 0x3F));
+                i += 3;
+            }
+
+            else
+                break;
+        }
+
+        else if ((c & 0xF8) == 0xF0)
+        {
+            if (i + 3 < str.size())
+            {
+                result += static_cast<wchar_t>(((c & 0x07) << 18) | ((str[i + 1] & 0x3F) << 12) | ((str[i + 2] & 0x3F) << 6) | (str[i + 3] & 0x3F));
+                i += 4;
+            }
+
+            else
+                break;
+        }
+
+        else
+            i += 1;
+    }
+
+    return result;
+}
 
 int main(int argc, char** argv)
 {
     if (argc < 3)
         return 0;
 
-    std::setlocale(LC_ALL, "");
-
     std::vector<std::wstring> args;
     args.reserve(argc - 2);
 
 #ifdef _WIN32
+    setlocale(LC_ALL, "");
     _setmode(_fileno(stdout), _O_U16TEXT);
 
     int wargc;
@@ -36,15 +89,15 @@ int main(int argc, char** argv)
         LocalFree(wargv);
     }
 #else
-    std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+    if (!setlocale(LC_ALL, "ru_RU.UTF-8"))
+        setlocale(LC_ALL, "en_US.UTF-8");
+
+    try {
+        std::wcout.imbue(std::locale(""));
+    } catch (...) {}
+
     for (int i = 0; i < argc; ++i)
-    {
-        try {
-            args.push_back(converter.from_bytes(argv[i]));
-        } catch (const std::range_error&) {
-            args.push_back(L"");
-        }
-    }
+        args.push_back(Utf8ToWString(argv[i]));
 #endif
     std::wstring mode = args[1];
 
