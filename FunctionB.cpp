@@ -1,13 +1,14 @@
 #include "Functions.hpp"
+#include <cwctype>
 
-void ConvertCase(std::string& str, Case reg)
+void ConvertCase(std::wstring& str, Case reg)
 {
-    for (char& c : str)
+    for (wchar_t& c : str)
     {
         if (reg == Case::Upper)
-            c = toupper(c);
+            c = std::towupper(c);
 
         else
-            c = tolower(c);
+            c = std::towlower(c);
     }
 }
