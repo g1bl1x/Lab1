@@ -3,6 +3,24 @@
 #include <iostream>
 #include <cmath>
 #include <Functions.hpp>
+#include <cstring>
+
+double inputTriangleSide(string text) {
+    double num;
+    while (true) {
+        cout << text;
+        if (!(cin >> num)) {
+            cout << "Ошибка! Введите число: ";
+            clearInput();
+            continue;
+        }
+        if (num <= 0) {
+            cout << "Сторона должна быть положительной!" << endl;
+            continue;
+        }
+        return num;
+    }
+}
 
 
 void rectangle() {
