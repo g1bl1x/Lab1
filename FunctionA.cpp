@@ -2,58 +2,54 @@
 #include <fcntl.h>
 #include <iostream>
 #include <cmath>
+#include <locale.h>
+#include <string>
 #include <Functions.hpp>
-#include <cstring>
 
-double inputTriangleSide(string text) {
-    double num;
-    while (true) {
-        cout << text;
-        if (!(cin >> num)) {
-            cout << "Ошибка! Введите число: ";
-            clearInput();
-            continue;
-        }
-        if (num <= 0) {
-            cout << "Сторона должна быть положительной!" << endl;
-            continue;
-        }
-        return num;
-    }
+double inputRectangleSide(std::string text) {
+	double num;
+	while (true) {
+		std::cout << text;
+		if (!(std::cin >> num)) {
+			std::cout << "Ошибка! Введите число: ";
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			continue;
+		}
+		if (num <= 0) {
+			std::cout << "Сторона должна быть положительной!" << std::endl;
+			continue;
+		}
+		return num;
+	}
 }
 
 
+
 void rectangle() {
-	_setmode(_fileno(stdout), _O_U16TEXT);
-	_setmode(_fileno(stdin), _O_U16TEXT);
-	_setmode(_fileno(stderr), _O_U16TEXT);
-	int a;
-	int b;
-	std::wcout << L"Введите длину: ";
-	std::wcin >> a;
-	std::wcout << L"Введите ширину: ";
-	std::wcin >> b;
-	std::wcout << L"Какой параметр прямоугольника нужно найти?\n 1. Периметр\n 2. Площадь\n 3. Длина диагонали\n" << std::endl;
+	double a, b;
+	a = inputRectangleSide("Введите длину: ");
+	b = inputRectangleSide("Введите ширину: ");
+	std::cout << "Какой параметр прямоугольника нужно найти?\n 1. Периметр\n 2. Площадь\n 3. Длина диагонали\n" << std::endl;
 	int i;
-	std::wcin >> i;
+	std::cin >> i;
 	switch (i) {
 		case 1: {
 			size_t perimeter = 2 * (a + b);
-			std::wcout << L"Периметр: " << perimeter << std::endl;
+			std::cout << "Периметр: " << perimeter << std::endl;
 			break;
 		}
 		case 2: {
 			size_t square = a * b;
-			std::wcout << L"Площадь: " << square << std::endl;
+			std::cout << "Площадь: " << square << std::endl;
 			break;
 		}
 		case 3: {
 			size_t diagonal = sqrt(a * a + b * b);
-			std::wcout << L"Длина диагонали: " << diagonal << std::endl;
+			std::cout << "Длина диагонали: " << diagonal << std::endl;
 			break;
 		}
 		default: {
-			std::wcout << L"Неверный выбор" << std::endl;
+			std::cout << "Неверный выбор" << std::endl;
 			break;
 		}
 	}
