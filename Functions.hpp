@@ -11,14 +11,8 @@ d.	Проверка, является ли строка палиндромом.
 
 void rectangle(); // a
 
-enum class Case
-{
-	Upper,
-	Lower
-};
+void triangle();// b
 
-void ConvertCase(std::wstring& str, Case reg); // b
+void trapezoid(); // c
 
-void StripSpecialCharacters(std::wstring& str); // c
-
-bool IsPalindrome(const std::wstring& str); // d
+void circle(); // d
