@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cmath>
-#include <windows.h>
 #include "Functions.hpp"
 
 bool TriangleExists(int a, int b, int c) {
@@ -59,11 +58,4 @@ void triangle() {
     default:
         std::cout << "Неверный выбор!\n";
     }
-}
-int main() {
-    SetConsoleOutputCP(65001);
-    SetConsoleCP(65001);
-
-    triangle();
-    return 0;
 }
