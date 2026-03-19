@@ -1,6 +1,4 @@
-﻿#include <io.h>
-#include <fcntl.h>
-#include <iostream>
+﻿#include <iostream>
 #include <cmath>
 #include <locale.h>
 #include <string>
@@ -11,7 +9,8 @@ double inputRectangleSide(std::string text) {
 	while (true) {
 		std::cout << text;
 		if (!(std::cin >> num)) {
-			std::cout << "Ошибка! Введите число: ";
+			std::cout << "Ошибка! Введите число\n";
+			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 			continue;
 		}
@@ -34,17 +33,17 @@ void rectangle() {
 	std::cin >> i;
 	switch (i) {
 		case 1: {
-			size_t perimeter = 2 * (a + b);
+			double perimeter = 2 * (a + b);
 			std::cout << "Периметр: " << perimeter << std::endl;
 			break;
 		}
 		case 2: {
-			size_t square = a * b;
+			double square = a * b;
 			std::cout << "Площадь: " << square << std::endl;
 			break;
 		}
 		case 3: {
-			size_t diagonal = sqrt(a * a + b * b);
+			double diagonal = sqrt(a * a + b * b);
 			std::cout << "Длина диагонали: " << diagonal << std::endl;
 			break;
 		}
