@@ -4,14 +4,14 @@
 #include <string>
 #include <Functions.hpp>
 
-double inputRectangleSide(std::string text) {
+double inputRectangleSide(std::string text) { //Функция для ввода сторон прямоугольника
 	double num;
 	while (true) {
 		std::cout << text;
 		if (!(std::cin >> num)) {
 			std::cout << "Ошибка! Введите число\n";
 			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //Очитска буфера ввода
 			continue;
 		}
 		if (num <= 0) {
@@ -24,7 +24,7 @@ double inputRectangleSide(std::string text) {
 
 
 
-void rectangle() {
+void rectangle() { //Основая функция для прямоугольника
 	double a, b;
 	a = inputRectangleSide("Введите длину: ");
 	b = inputRectangleSide("Введите ширину: ");
