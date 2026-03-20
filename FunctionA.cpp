@@ -2,7 +2,7 @@
 #include <cmath>
 #include <locale.h>
 #include <string> 
-#include "Functions.hpp"
+#include "Functions.hpp" //git
 
 double inputRectangleSide(std::string text) { //Функция для ввода сторон прямоугольника
 	double num;
