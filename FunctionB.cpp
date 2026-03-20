@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "Functions.hpp"
+#include "Functions.hpp"    //git commit
 
 bool TriangleExists(int a, int b, int c) {
     return (a + b > c) && (a + c > b) && (b + c > a);
