@@ -1,8 +1,8 @@
 ﻿#include <iostream>
 #include <cmath>
 #include <locale.h>
-#include <string>
-#include "Functions.hpp" //Библиотеки
+#include <string> 
+#include "Functions.hpp"
 
 double inputRectangleSide(std::string text) { //Функция для ввода сторон прямоугольника
 	double num;
