@@ -1,3 +1,4 @@
+#include "Functions.hpp"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -66,7 +67,7 @@ float sectorSquare(float circleSquare, float angle)
 }
 
 
-int circle()
+int main()
 {
     startOutput();  
 
