@@ -1,37 +1,84 @@
-#include "Functions.hpp"
 #include <iostream>
-#include <cmath>
+#include <string>
+#include <sstream>
+
 using namespace std;
 
-// функция длины окружности
-double circumference(double r) {
-    return 2 * M_PI * r;
+void startOutput()
+{
+    cout << "В этой программе вы можете узнать длину окружности, площадь круга и площадь сектора, " << endl;
+    cout << "задав радиус круга и угол интересуемого сектора." << endl << endl;
 }
 
-// функция площади круга
-double circleArea(double r) {
-    return M_PI * r * r;
+float getSafeInputRadius(string message)
+{
+    string line;
+    float value;
+    while (true) {
+        cout << message;
+        getline(cin, line); // Проверяю всю строку целиком
+        
+        stringstream ss(line);
+        // Считаю число и проверяю, что после него ничего нет
+        if (ss >> value && ss.eof()) {
+            if (value >= 0) return value;
+        }
+        
+        cout << "Ошибка! Введите только натуральное число!" << endl;
+    }
 }
 
-// функция площади сектора
-double sectorArea(double r, double angle) {
-    return M_PI * r * r * (angle / 360);
+
+float getSafeInputAngle(string message)
+{
+    string line;
+    float value;
+    while (true) {
+        cout << message;
+        getline(cin, line); // Проверяю всю строку целиком
+        
+        stringstream ss(line);
+        // Считаю число и проверяю, что после него ничего нет
+        if (ss >> value && ss.eof()) {
+            if (value >= 0 && value <= 360) return value;
+        }
+        
+        cout << "Ошибка! Введите значение угла от 0 до 360!" << endl;
+    }
 }
 
-int main() {
-    double r, angle;
+float circleLength(float radius)
+{
+    float circleLength = 2 * 3.14 * radius;
+    return circleLength;
+}
 
-    cout << "Введите радиус: ";
-    cin >> r;
+float circleSquare(float radius)
+{
+    float circleSquare = 3.14 * (radius * radius);
+    return circleSquare;
+}
 
-    cout << "Введите угол сектора (в градусах): ";
-    cin >> angle;
+float sectorSquare(float circleSquare, float angle)
+{
+    float sectorSquare = circleSquare * (angle / 360);
+    return sectorSquare;
+}
 
-    cout << "\nРезультаты:\n";
 
-    cout << "Длина окружности: " << circumference(r) << endl;
-    cout << "Площадь круга: " << circleArea(r) << endl;
-    cout << "Площадь сектора: " << sectorArea(r, angle) << endl;
+int main()
+{
+    startOutput();  
+
+    float radius  = getSafeInputRadius("Введите радиус: ");
+    float angle = getSafeInputAngle("Введите угол сектора: ");
+
+    float square = circleSquare(radius);
+
+    cout << endl << "Параметры заданного круга:" << endl;
+    cout << "Длина окружности: " << circleLength(radius) << endl;
+    cout << "Площадь круга: " << square << endl;
+    cout << "Площадь сектора: " << sectorSquare(square, angle) << endl;
 
     return 0;
 }
