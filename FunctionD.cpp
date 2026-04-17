@@ -24,7 +24,7 @@ float getSafeInputRadius(string message)
             if (value >= 0) return value;
         }
         
-        cout << "Ошибка! Введите только натуральное число!" << endl;
+        cout << "Ошибка! Введите только горизонтальное число!" << endl;
     }
 }
 
